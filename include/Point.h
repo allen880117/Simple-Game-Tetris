@@ -3,10 +3,12 @@
 
 namespace canva{
 
-    // Pre-declaration of Class, Rect and Object
+    // Pre-declaration of Class, Rect , Board and Object
     // Completely declare in "Rect.h"
+    // Completely declare in "Board.h"
     // Completely declare in "Object.h"
     class Rect;
+    class Board;
     class Object;
 
     // Declaration of Class, Point
@@ -17,8 +19,11 @@ namespace canva{
             Point();
             Point(const int x, const int y);
 
-            // Calculate the summation of 
+            // Calculate the summation of two points
             Point operator+(const Point &rhs) const;
+
+            // Calculate the subtraction of two points
+            Point operator-(const Point &rhs) const;
 
             // Is Point inside the Rect
             bool isInside(const Rect &rect) const;
@@ -34,6 +39,7 @@ namespace canva{
             int Y;
 
         friend Rect;
+        friend Board;
         friend Object;
     };
 

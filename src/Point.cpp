@@ -14,9 +14,14 @@ namespace canva{
         this->Y = y;
     }
 
-    // Calculate the summation of 
+    // Calculate the summation of two points
     Point Point::operator+(const Point &rhs) const{
         return Point(this->X + rhs.X, this->Y + rhs.Y);
+    }
+
+    // Calculate the subtraction of two points
+    Point Point::operator-(const Point &rhs) const{
+        return Point(this->X - rhs.X, this->Y - rhs.Y);
     }
 
     // Is Point inside the Rect

@@ -4,6 +4,10 @@
 #include "Object.h"
 
 namespace canva{
+    
+    // Pre-declaration of Class, Board
+    // Completely declare in "Board.h"
+    class Board;
 
     // Declaration of Class, Rect
     class Rect {
@@ -22,6 +26,8 @@ namespace canva{
         private:
             Point LeftTop;
             Point RightBottom;
+
+        friend Board;
     };
 
 } // namespace canva

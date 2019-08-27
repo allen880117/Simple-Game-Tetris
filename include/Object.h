@@ -1,13 +1,14 @@
 #ifndef OBJECT_H
 #define OBJECT_H
-
 #include "Point.h"
 
 namespace canva{
 
-    // Pre-declaration of Class, Rect and Object
+    // Pre-declaration of Class, Rect and Board
     // Completely declare in "Rect.h" 
+    // Completely declare in "Board.h" 
     class Rect;
+    class Board;
     
     // Declaration of Class, Object
     class Object{
@@ -39,6 +40,7 @@ namespace canva{
             int dir;
     
         friend Rect;
+        friend Board;
     };
 } // namespace canva
 #endif

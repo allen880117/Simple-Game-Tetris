@@ -3,9 +3,11 @@
 
 namespace canva{
 
-    // Pre-declaration of Class, Rect
-    // Completely decalre in "Rect.h"
+    // Pre-declaration of Class, Rect and Object
+    // Completely declare in "Rect.h"
+    // Completely declare in "Object.h"
     class Rect;
+    class Object;
 
     // Declaration of Class, Point
     class Point{
@@ -21,11 +23,18 @@ namespace canva{
             // Is Point inside the Rect
             bool isInside(const Rect &rect) const;
 
+            // Get/Set
+            int getX() const;
+            int getY() const;
+            void setX(const int x);
+            void setY(const int y);
+
         private:
             int X;
             int Y;
 
-        friend class Rect;
+        friend Rect;
+        friend Object;
     };
 
 } // namespace canva

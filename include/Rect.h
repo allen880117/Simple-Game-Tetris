@@ -1,6 +1,7 @@
 #ifndef RECT_H
 #define RECT_H
 #include "Point.h"
+#include "Object.h"
 
 namespace canva{
 
@@ -9,18 +10,18 @@ namespace canva{
 
         public:
             // Constructor
-            Rect(const int left, const int top, const int right, const int bottom);
-            Rect(const Point &LeftTop, const Point &RightBottom);
+            Rect(const Point &lt, const Point &rb);
 
-            // Does Rect contain this Point
+            // Does Rect contain this Point or Object
             bool contains(const Point &pt) const;
-            
+            bool contains(const Object &obj) const;
+
+            // Draw Boundary (innner)
+            void drawBoundary();
 
         private:
-            int Left;
-            int Top;
-            int Right;
-            int Bottom;
+            Point LeftTop;
+            Point RightBottom;
     };
 
 } // namespace canva

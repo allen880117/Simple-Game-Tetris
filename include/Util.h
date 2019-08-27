@@ -2,18 +2,23 @@
 #define UTIL_H
 #include <conio.h>
 #include <windows.h>
+#include "Point.h"
 
-// Move cursor to position <x, y>
-// <x, y> start from <0, 0>
-void gotoxy(int x, int y);
+namespace util{
+    // Move cursor to position <x, y>
+    // <x, y> start from <0, 0>
+    void gotoxy(int x, int y);
+    void gotoxy(const canva::Point &pt);
 
-// Clear screen
-void clrscr();
+    // Clear screen
+    void clrscr();
 
-// Delay the process of program
-void delay(int ms);
+    // Delay the process of program
+    void delay(int ms);
 
-// Change the text color of console
-// WORD setTextColor(WORD color);
+    // Change the text color of console
+    // WORD setTextColor(WORD color);   
+} // namespace util
+
 
 #endif

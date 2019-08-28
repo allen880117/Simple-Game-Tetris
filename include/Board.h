@@ -1,7 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
-#include "Rect.h"
+#include "Point.h"
 #include "Object.h"
+#include "Rect.h"
 
 namespace canva{
 
@@ -34,6 +35,7 @@ namespace canva{
         Rect* rect;
         int* pin;
     };
+    
 } // namespace canva
 
 #endif

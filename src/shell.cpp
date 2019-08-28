@@ -8,6 +8,7 @@
 #include "Rect.h"
 #include "Board.h"
 #include "Command.h"
+#include "ConstParam.h"
 using namespace std;
 using namespace util;
 using namespace canva;

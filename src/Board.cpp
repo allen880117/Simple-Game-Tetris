@@ -1,9 +1,9 @@
-#include "Board.h"
+#include <cstdio>
+#include "Point.h"
 #include "Object.h"
 #include "Rect.h"
-#include "Point.h"
+#include "Board.h"
 #include "Util.h"
-#include "cstdio"
 #include "ConstParam.h"
 
 namespace canva{

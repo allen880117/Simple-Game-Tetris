@@ -3,13 +3,13 @@
 
 namespace canva{
 
-    // Pre-declaration of Class, Rect , Board and Object
+    // Pre-declaration of Class, Object, Rect and Board
     // Completely declare in "Rect.h"
     // Completely declare in "Board.h"
     // Completely declare in "Object.h"
+    class Object;
     class Rect;
     class Board;
-    class Object;
 
     // Declaration of Class, Point
     class Point{
@@ -38,9 +38,9 @@ namespace canva{
             int X;
             int Y;
 
+        friend Object;        
         friend Rect;
         friend Board;
-        friend Object;
     };
 
 } // namespace canva

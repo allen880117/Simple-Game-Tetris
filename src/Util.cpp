@@ -1,6 +1,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "Point.h"
+#include "ConstParam.h"
 
 static HANDLE hConsole = 0;
 static int instanceCount = 0;
@@ -16,7 +17,7 @@ namespace util{
             instanceCount = 1;
         }
 
-        coord.X = x;
+        coord.X = x * cc::scaleWidth;
         coord.Y = y;
 
         SetConsoleCursorPosition(hConsole, coord);

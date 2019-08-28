@@ -2,7 +2,7 @@
 #include "Point.h"
 #include "Util.h"
 #include <cstdio>
-#include "ConstCharacter.h"
+#include "ConstParam.h"
 
 namespace canva{
     // Constructor

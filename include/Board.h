@@ -26,11 +26,13 @@ namespace canva{
         // Get rect
         Rect getRect() const;
 
+        // Get height or width
+        int getHeight() const;
+        int getWidth() const;
+
       private:
         Rect* rect;
         int* pin;
-        int height;
-        int width;
     };
 } // namespace canva
 

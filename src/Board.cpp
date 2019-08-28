@@ -11,12 +11,11 @@ namespace canva{
     Board::Board(const Point &lt, const Point &rb) {
         
         this->rect = new Rect(lt, rb);
-        this->width = Point(rb-lt).X + 1;
-        this->height = Point(rb-lt).Y + 1;
-        this->pin = new int[this->width*this->height];
+        this->pin = new int[this->getWidth()*this->getHeight()];
 
         // Initial
-        for(int i=0; i<this->width*this->height; i++) this->pin[i] = 0;
+        for(int i=0; i<this->getWidth()*this->getHeight(); i++) 
+            this->pin[i] = 0;
     }
 
     // Destructor    
@@ -28,10 +27,10 @@ namespace canva{
     // Draw pins
     void Board::drawPins(){
         // Traverse all pins
-        for(int i=0; i<this->height; i++){
+        for(int i=0; i<this->getHeight(); i++){
             util::gotoxy(this->rect->LeftTop + Point(0, i));
-            for(int j=0; j<this->width; j++){
-                if(pin[i*width + j] == 1) printf("O");
+            for(int j=0; j<this->getWidth(); j++){
+                if(pin[i*this->getWidth() + j] == 1) printf("O");
                 else printf(" ");
             }
         }
@@ -42,7 +41,7 @@ namespace canva{
         
         for(int i=0; i<4; i++){
             Point offsetFromLT = ( obj.locate + obj.blocks[i] ) - this->rect->LeftTop;
-            int idx = offsetFromLT.Y * this->width + offsetFromLT.X;
+            int idx = offsetFromLT.Y * this->getWidth() + offsetFromLT.X;
             
             if(this->pin[idx] == 1) // Obj touch the pin
                 return false;
@@ -55,7 +54,7 @@ namespace canva{
     void Board::setObjectPins(const Object &obj){
         for(int i=0; i<4; i++){
             Point offsetFromLT = ( obj.locate + obj.blocks[i] ) - this->rect->LeftTop;
-            int idx = offsetFromLT.Y * this->width + offsetFromLT.X;
+            int idx = offsetFromLT.Y * this->getWidth() + offsetFromLT.X;
             this->pin[idx] = 1;
         }
     }
@@ -63,6 +62,16 @@ namespace canva{
     // Get rect
     Rect Board::getRect() const{
         return *(this->rect);
+    }
+
+    // Get Height
+    int Board::getHeight() const{
+        return this->rect->height;
+    }
+    
+    // Get Width
+    int Board::getWidth() const{
+        return this->rect->width;
     }
 
 } // namespace canva

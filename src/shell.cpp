@@ -30,15 +30,16 @@ int main(){
     int typeRng = rand() % 7;
 
     // Instantiate Tetris Block
-    Object block(typeRng, Point(1,1)); 
+    Point generatePoint = mainBoard.getRect().getLeftTop() 
+                            + Point(mainBoard.getWidth()/2 -2 , 0);
+    Object block(typeRng, generatePoint); 
 
     // Instantiate Command
     Command command;
     while(true){
 
-        // Background.drawBoundary();
         // typeRng = rand() % 7;
-        // sth1.reset(typeRng, Point(1,1));
+        // block.reset(typeRng, Point(1,1));
         util::SetColor(4);
         block.draw(true);
 
@@ -51,7 +52,7 @@ int main(){
                 util::gotoxy(12, 21);
                 printf("^");
                 block.draw(false);
-                block.move(Point(0,-1), mainBoard);
+                block.turn(CLOCKWISE, mainBoard);
             }
             else if(command.getKeyType() == DownArrow){
                 util::gotoxy(12, 21);
@@ -81,7 +82,7 @@ int main(){
         }
 
         command.reset();
-
+        util::gotoxy(0,0);
         delay(33);
     }
 

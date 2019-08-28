@@ -4,7 +4,7 @@
 
 namespace canva{
 
-    enum direction{
+    enum DirClock{
         CLOCKWISE,
         COUNTERCLOCKWISE,
     };
@@ -22,17 +22,14 @@ namespace canva{
             // Consturctor
             Object(const int type, const Point &loc=Point(0, 0));
             
-            // switch Type
-            void switchType(const int type);
-
-            // switch Direction
-            void switchDirection(const int dir);
+            // switch Type and Direction
+            void switchTypeDirection(const int type, const int direction = 0);
 
             // Move offset
             bool move(const Point &offset, const Board &board);
 
             // Turn
-            bool turn(const direction &dir);
+            bool turn(const DirClock &dirclock, const Board &board);
             
             // Reset
             void reset(const int type, const Point &loc=Point(0, 0));
@@ -47,11 +44,16 @@ namespace canva{
             void draw(bool show=true) const;
             
         private:
+            // Set Blocks
+            void setBlocks( const Point &pt0,
+                            const Point &pt1,
+                            const Point &pt2,
+                            const Point &pt3 );
             // Left Top locate
             Point locate;
             Point blocks[4];
             int type;
-            int dir;
+            int direction;
     
         friend Rect;
         friend Board;

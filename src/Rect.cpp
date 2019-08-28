@@ -8,6 +8,8 @@ namespace canva{
     Rect::Rect(const Point &lt, const Point &rb){     
         this->LeftTop = lt;
         this->RightBottom = rb;
+        this->width = Point(rb-lt).X + 1;
+        this->height = Point(rb-lt).Y + 1;
     }
 
     // Does Rect contain this Point or Object (Fully Inside)
@@ -35,9 +37,6 @@ namespace canva{
 
     // Draw Boundary (innner)
     void Rect::drawBoundary(){
-        
-        int width = this->RightBottom.X - this->LeftTop.X +1;
-        int height = this->RightBottom.Y - this->LeftTop.Y +1;
 
         // Top Bound
         util::gotoxy(this->LeftTop);
@@ -67,6 +66,26 @@ namespace canva{
 
         // Avolid the twinkle of cursor
         util::gotoxy(0, 0);
+    }
+
+    // Get LeftTop
+    Point Rect::getLeftTop() const{
+        return this->LeftTop;
+    }
+    
+    // Get RightBottom
+    Point Rect::getRightBottom() const{
+        return this->RightBottom;
+    }
+
+    // Get Height
+    int Rect::getHeight() const{
+        return this->height;
+    }
+
+    // Get Width    
+    int Rect::getWidth() const{
+        return this->width;
     }
 
 } // namespace canva

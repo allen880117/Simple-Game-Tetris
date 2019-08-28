@@ -23,9 +23,19 @@ namespace canva{
             // Draw Boundary (innner)
             void drawBoundary();
 
+            // Get LeftTop or RightBottom
+            Point getLeftTop() const;
+            Point getRightBottom() const;
+
+            // Get height or width
+            int getHeight() const;
+            int getWidth() const;
+
         private:
             Point LeftTop;
             Point RightBottom;
+            int height;
+            int width;
 
         friend Board;
     };

@@ -1,7 +1,8 @@
 #include "Rect.h"
 #include "Point.h"
 #include "Util.h"
-#include "cstdio"
+#include <cstdio>
+#include "ConstCharacter.h"
 
 namespace canva{
     // Constructor
@@ -41,27 +42,24 @@ namespace canva{
         // Top Bound
         util::gotoxy(this->LeftTop);
         for(int i=0; i<width; i++){
-            if( i == 0 ) printf("+");
-            else if( i == width - 1) printf("+");
-            else printf("-");
+            if( i == 0 || i == width - 1) printf("%s", cc::cConner);
+            else printf("%s", cc::cDash);
         }
 
         // Between
         for(int i=1; i<height-1; i++){
             printf("\n");
             for(int i=0; i<width; i++){
-                if( i == 0 ) printf("|");
-                else if( i == width - 1) printf("|");
-                else printf(" ");
+                if( i == 0 || i == width - 1) printf("%s", cc::cSideEdge);
+                else printf("%s", cc::cEmpty);
             }
         }
 
         // Bottom Bound
         printf("\n");
         for(int i=0; i<width; i++){
-            if( i == 0 ) printf("+");
-            else if( i == width - 1) printf("+");
-            else printf("-");
+            if( i == 0 || i == width - 1) printf("%s", cc::cConner);
+            else printf("%s", cc::cDash);
         }
 
         // Avolid the twinkle of cursor

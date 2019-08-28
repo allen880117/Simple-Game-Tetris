@@ -61,8 +61,7 @@ namespace util{
         Sleep(ms);
     }
 
-    void SetColor(const int color)
-    {
+    void SetColor(const int color){
         SetConsoleTextAttribute(hConsole,color);
     }
     

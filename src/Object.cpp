@@ -3,7 +3,7 @@
 #include "util.h"
 #include "cstdio"
 #include "Board.h"
-#include "ConstCharacter.h"
+#include "ConstParam.h"
 
 namespace canva{
 

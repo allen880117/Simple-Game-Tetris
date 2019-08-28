@@ -61,6 +61,61 @@ namespace canva{
         }
     }
 
+    // Check whether pins form lines, if exists, rearrange them
+    void Board::lineCheckAndRearrange(){
+        
+        // Declare some temp counters
+        bool* isFull = new bool[this->rect->height];
+        int* downCounter = new int[this->rect->height];
+        for(int i=0; i<this->getHeight(); i++){
+            isFull[i] = true;
+            downCounter[i] = 0;
+        }
+
+        // Check
+        for(int i=0; i<this->getHeight(); i++){
+            
+            // Check is line full
+            for(int j=0; j<this->getWidth(); j++){
+                if(this->pin[i*this->getWidth() + j] == 0){
+                    isFull[i] = false;
+                    break;                    
+                }
+            }
+
+            // if line is full
+            if(isFull[i]){
+                // The lines that above this line need go down one more block 
+                for(int j=i-1; j>=0; j--){
+                    downCounter[j]++;
+                }
+            }
+
+        }
+
+        // Rearrange
+        int* tempPins = new int[this->getWidth()*this->getHeight()];
+        for(int i=0; i<this->getWidth()*this->getHeight(); i++) 
+            tempPins[i] = 0;
+        
+        for(int i=0; i<this->getHeight(); i++){
+            if(!isFull[i]){
+                for(int j=0; j<this->getWidth(); j++){
+                    int idx = (i+downCounter[i]) * this->getWidth() + j;
+                    tempPins[idx] = this->pin[i*this->getWidth() + j];
+                }       
+            }
+        }
+        
+        // Change Pointer
+        delete [] this->pin;
+        this->pin = tempPins;
+
+        // Free temp counters
+        delete [] isFull;
+        delete [] downCounter;
+    }
+
     // Get rect
     Rect Board::getRect() const{
         return *(this->rect);

@@ -24,6 +24,9 @@ namespace canva{
         // Set pins of Object
         void setObjectPins(const Object &obj);
 
+        // Check whether pins form lines, if exists, rearrange them    
+        void lineCheckAndRearrange();
+
         // Get rect
         Rect getRect() const;
 

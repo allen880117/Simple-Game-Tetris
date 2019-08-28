@@ -37,12 +37,15 @@ int main(){
 
     // Instantiate Command
     Command command;
+
+    block.draw(true);
+    util::delay(333);
+
     while(true){
 
         // typeRng = rand() % 7;
         // block.reset(typeRng, Point(1,1));
         util::SetColor(4);
-        block.draw(true);
 
         if(kbhit()){
             command.getInput();
@@ -54,6 +57,9 @@ int main(){
                 printf("^");
                 block.draw(false);
                 block.turn(CLOCKWISE, mainBoard);
+                block.draw(true);                
+                mainBoard.lineCheckAndRearrange();
+                mainBoard.drawPins();
             }
             else if(command.getKeyType() == DownArrow){
                 util::gotoxy(12, 21);
@@ -61,6 +67,7 @@ int main(){
 
                 block.draw(false);
                 block.move(Point(0,1), mainBoard);
+                block.draw(true);                
             }
             else if(command.getKeyType() == LeftArrow){
                 util::gotoxy(12, 21);
@@ -68,6 +75,7 @@ int main(){
 
                 block.draw(false);
                 block.move(Point(-1,0), mainBoard);
+                block.draw(true);                
             }
             else if(command.getKeyType() == RightArrow){
                 util::gotoxy(12, 21);
@@ -75,6 +83,7 @@ int main(){
 
                 block.draw(false);
                 block.move(Point(1,0), mainBoard);
+                block.draw(true);                
             }
             else if(command.getKeyType() == Space){
                 util::gotoxy(12, 21);
@@ -82,9 +91,15 @@ int main(){
             }
         }
 
+        else{
+            block.draw(false);
+            block.move(Point(0,1), mainBoard);
+            block.draw(true);
+        }
+
         command.reset();
         util::gotoxy(0,0);
-        delay(33);
+        util::delay(333);
     }
 
     util::gotoxy(0,22);

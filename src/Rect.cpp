@@ -10,7 +10,7 @@ namespace canva{
         this->RightBottom = rb;
     }
 
-    // Does Rect contain this Point or Object
+    // Does Rect contain this Point or Object (Fully Inside)
     bool Rect::contains(const Point &pt) const{
         if( pt.X >= this->LeftTop.X && pt.X <= this->RightBottom.X &&
             pt.Y >= this->LeftTop.Y && pt.Y <= this->RightBottom.Y ) 
@@ -22,9 +22,9 @@ namespace canva{
     }
 
     bool Rect::contains(const Object &obj) const{
-        if( this->contains(obj.locate + obj.blocks[0]) ||
-            this->contains(obj.locate + obj.blocks[1]) ||
-            this->contains(obj.locate + obj.blocks[2]) ||
+        if( this->contains(obj.locate + obj.blocks[0]) &&
+            this->contains(obj.locate + obj.blocks[1]) &&
+            this->contains(obj.locate + obj.blocks[2]) &&
             this->contains(obj.locate + obj.blocks[3]) )
             return true;
         else

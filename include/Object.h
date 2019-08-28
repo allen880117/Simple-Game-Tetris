@@ -4,6 +4,11 @@
 
 namespace canva{
 
+    enum direction{
+        CLOCKWISE,
+        COUNTERCLOCKWISE,
+    };
+
     // Pre-declaration of Class, Rect and Board
     // Completely declare in "Rect.h" 
     // Completely declare in "Board.h" 
@@ -20,14 +25,23 @@ namespace canva{
             // switch Type
             void switchType(const int type);
 
+            // switch Direction
+            void switchDirection(const int dir);
+
             // Move offset
-            bool move(const Point &offset, const Rect &boundary);
+            bool move(const Point &offset, const Board &board);
+
+            // Turn
+            bool turn(const direction &dir);
             
             // Reset
             void reset(const int type, const Point &loc=Point(0, 0));
 
             // Is inside rect
-            bool isInside(const Rect &rect) const;
+            bool isInsideRect(const Rect &rect) const;
+
+            // Is touch board pin
+            bool isTouchPins(const Board &board) const;
 
             // Draw
             void draw(bool show=true) const;

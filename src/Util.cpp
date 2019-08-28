@@ -6,6 +6,7 @@ static HANDLE hConsole = 0;
 static int instanceCount = 0;
 
 namespace util{
+
     void gotoxy(int x, int y){
 
         COORD coord;
@@ -56,9 +57,15 @@ namespace util{
 
     }
 
-    void delay(int ms){
+    void delay(const int ms){
         Sleep(ms);
     }
+
+    void SetColor(const int color)
+    {
+        SetConsoleTextAttribute(hConsole,color);
+    }
+    
 } // namespace util
 
 

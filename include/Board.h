@@ -17,11 +17,14 @@ namespace canva{
         // Draw pins
         void drawPins();
 
+        // Is the pin be touched by object
+        bool isPinsTouched(const Object &obj) const;
+
         // Set pins of Object
         void setObjectPins(const Object &obj);
 
         // Get rect
-        Rect getRect();
+        Rect getRect() const;
 
       private:
         Rect* rect;

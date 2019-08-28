@@ -17,7 +17,6 @@ namespace canva{
 
         // Initial
         for(int i=0; i<this->width*this->height; i++) this->pin[i] = 0;
-
     }
 
     // Destructor    
@@ -38,6 +37,20 @@ namespace canva{
         }
     }
 
+    // Is the pin be touched by object
+    bool Board::isPinsTouched(const Object &obj) const{
+        
+        for(int i=0; i<4; i++){
+            Point offsetFromLT = ( obj.locate + obj.blocks[i] ) - this->rect->LeftTop;
+            int idx = offsetFromLT.Y * this->width + offsetFromLT.X;
+            
+            if(this->pin[idx] == 1) // Obj touch the pin
+                return false;
+        }
+
+        return true; // Obj doesn't touch the pins
+    }
+
     // Set pins of Object
     void Board::setObjectPins(const Object &obj){
         for(int i=0; i<4; i++){
@@ -48,7 +61,7 @@ namespace canva{
     }
 
     // Get rect
-    Rect Board::getRect(){
+    Rect Board::getRect() const{
         return *(this->rect);
     }
 

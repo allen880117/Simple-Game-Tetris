@@ -15,13 +15,14 @@ using namespace canva;
 int main(){
     
     util::clrscr();
-    
+    util::SetColor(7);
     // Draw Boundary
     Rect Background(Point(0, 0), Point(10+1, 20+1));
     Background.drawBoundary();
 
     // Draw Main Board
     Board mainBoard(Point(1, 1), Point(10, 20));
+    util::SetColor(10);
     mainBoard.drawPins();
 
     // Random Number Generator
@@ -38,6 +39,7 @@ int main(){
         // Background.drawBoundary();
         // typeRng = rand() % 7;
         // sth1.reset(typeRng, Point(1,1));
+        util::SetColor(4);
         block.draw(true);
 
         if(kbhit()){
@@ -48,21 +50,29 @@ int main(){
             else if(command.getKeyType() == UpArrow){
                 util::gotoxy(12, 21);
                 printf("^");
+                block.draw(false);
+                block.move(Point(0,-1), mainBoard);
             }
             else if(command.getKeyType() == DownArrow){
                 util::gotoxy(12, 21);
                 printf("v");
 
                 block.draw(false);
-                block.move(Point(0,1), mainBoard.getRect());
+                block.move(Point(0,1), mainBoard);
             }
             else if(command.getKeyType() == LeftArrow){
                 util::gotoxy(12, 21);
                 printf("<");
+
+                block.draw(false);
+                block.move(Point(-1,0), mainBoard);
             }
             else if(command.getKeyType() == RightArrow){
                 util::gotoxy(12, 21);
                 printf(">");
+
+                block.draw(false);
+                block.move(Point(1,0), mainBoard);
             }
             else if(command.getKeyType() == Space){
                 util::gotoxy(12, 21);
@@ -72,7 +82,7 @@ int main(){
 
         command.reset();
 
-        delay(100);
+        delay(33);
     }
 
     util::gotoxy(0,22);

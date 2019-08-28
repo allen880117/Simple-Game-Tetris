@@ -14,10 +14,11 @@ namespace util{
     void clrscr();
 
     // Delay the process of program
-    void delay(int ms);
+    void delay(const int ms);
 
-    // Change the text color of console
-    // WORD setTextColor(WORD color);   
+    // Set Text and Background Color
+    void SetColor(const int color=7);
+
 } // namespace util
 
 

@@ -2,6 +2,7 @@
 #include "Rect.h"
 #include "util.h"
 #include "cstdio"
+#include "Board.h"
 
 namespace canva{
 
@@ -10,7 +11,7 @@ namespace canva{
         this->type = type;
         this->dir = 0;
         this->locate = loc;
-        switchType(type);
+        this->switchType(type);
     }
 
     // switchType
@@ -67,24 +68,60 @@ namespace canva{
                 break;
         }
     }
+
+    // switchDirection
+    void Object::switchDirection(const int dir){
+
+    }
+
+    // Move offset
+    bool Object::move(const Point &offset, const Board &board){
+        
+        // Move First
+        for(int i=0; i<4; i++) { this->blocks[i] = this->blocks[i] + offset; } 
+
+        bool isLegal = true;
+        
+        // Check is moved object inside boundary
+        // Check does moved object touch the pins on board
+        isLegal = this->isInsideRect(board.Board::getRect())
+                    && this->isTouchPins(board);
+
+        if(!isLegal) { // Not a legal move
+            for(int i=0; i<4; i++) { this->blocks[i] = this->blocks[i] - offset; } 
+            return false;
+        } else { // a legal move
+            return true;
+        }
+    }
+
+    // Turn
+    bool Object::turn(const direction &d){
+        switch (d){
+            case CLOCKWISE:  this->dir = (this->dir >=3) ? 0 : this->dir+1;
+            case COUNTERCLOCKWISE: this->dir = (this->dir <=0) ? 3 : this->dir-1;
+        }
+
+        this->switchDirection(this->dir);
+        return true; // dev
+    }
     
     // Reset
     void Object::reset(const int type, const Point &loc){
         this->type = type;
         this->dir = 0;
         this->locate = loc;
-        switchType(type);
-    }
-
-    // Move offset
-    bool Object::move(const Point &offset, const Rect &boundary){
-        for(int i=0; i<4; i++) this->blocks[i] = this->blocks[i] + offset;
-        return true; // Dev
+        this->switchType(type);
     }
 
     // Is inside rect
-    bool Object::isInside(const Rect &rect) const{
+    bool Object::isInsideRect(const Rect &rect) const{
         return rect.Rect::contains(*this);
+    }
+
+    // Is touch board pin
+    bool Object::isTouchPins(const Board &board) const{
+        return board.Board::isPinsTouched(*this);
     }
 
     // Draw

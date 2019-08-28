@@ -15,7 +15,7 @@ namespace util {
         if( this->prefix == 0xe0 || this->prefix == 0x00 ) this->postfix = getch();
     }
 
-    // Check input key
+    // Check input key (ANSI)
     int Command::getKeyType(){
         
         if( this->prefix == 0xe0 || this->prefix == 0x00 ){

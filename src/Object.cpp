@@ -3,6 +3,7 @@
 #include "util.h"
 #include "cstdio"
 #include "Board.h"
+#include "ConstCharacter.h"
 
 namespace canva{
 
@@ -160,8 +161,8 @@ namespace canva{
         
         for(int i=0; i<4; i++){
             util::gotoxy(this->locate + this->blocks[i]);
-            if(show) printf("*"); // Show Obj
-            else printf(" "); // Clear Obj
+            if(show) printf("%s", cc::cBlocks); // Show Obj
+            else printf("%s", cc::cEmpty); // Clear Obj
         }
         
         // Avoid the twinkle of cursor

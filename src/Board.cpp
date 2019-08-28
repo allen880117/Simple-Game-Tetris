@@ -4,6 +4,7 @@
 #include "Point.h"
 #include "Util.h"
 #include "cstdio"
+#include "ConstCharacter.h"
 
 namespace canva{
 
@@ -26,12 +27,13 @@ namespace canva{
 
     // Draw pins
     void Board::drawPins(){
+
         // Traverse all pins
         for(int i=0; i<this->getHeight(); i++){
             util::gotoxy(this->rect->LeftTop + Point(0, i));
             for(int j=0; j<this->getWidth(); j++){
-                if(pin[i*this->getWidth() + j] == 1) printf("O");
-                else printf(" ");
+                if(pin[i*this->getWidth() + j] == 1) printf("%s", cc::cPin);
+                else printf("%s", cc::cEmpty);
             }
         }
     }

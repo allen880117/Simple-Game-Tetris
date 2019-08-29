@@ -20,8 +20,11 @@ namespace canva{
             bool contains(const Point &pt) const;
             bool contains(const Object &obj) const;
 
-            // Draw Boundary (innner)
-            void drawBoundary();
+            // Draw Boundary (inner)
+            void drawInnerBoundary();
+
+            // Draw Boundary (outer)
+            void drawOuterBoundary();
 
             // Get LeftTop or RightBottom
             Point getLeftTop() const;

@@ -38,7 +38,7 @@ namespace canva{
         }
     }
 
-    // Is the pin be touched by object
+    // Is the pin be touched by object, "false" means Obj touch the Pin
     bool Board::isPinsTouched(const Object &obj) const{
         
         for(int i=0; i<4; i++){

@@ -16,14 +16,11 @@ using namespace canva;
 int main(){
     
     util::clrscr();
-    util::SetColor(7);
-    // Draw Boundary
-    Rect Background(Point(0, 0), Point(10+1, 20+1));
-    Background.drawBoundary();
 
     // Draw Main Board
     Board mainBoard(Point(1, 1), Point(10, 20));
     util::SetColor(10);
+    mainBoard.getRect().drawOuterBoundary();
     mainBoard.drawPins();
 
     // Random Number Generator
@@ -38,68 +35,91 @@ int main(){
     // Instantiate Command
     Command command;
 
-    block.draw(true);
-    util::delay(333);
-
     while(true){
 
         // typeRng = rand() % 7;
         // block.reset(typeRng, Point(1,1));
-        util::SetColor(4);
+        int BottomTouchCounter = 0;
+        
+        util::SetColor(7);
+        block.reset(rand()%7, generatePoint);
+        block.draw(true);
+        util::delay(333);
 
-        if(kbhit()){
-            command.getInput();
-            if(command.getKeyType() == ESC){
-                break;
-            }
-            else if(command.getKeyType() == UpArrow){
-                util::gotoxy(12, 21);
-                printf("^");
-                block.draw(false);
-                block.turn(CLOCKWISE, mainBoard);
-                block.draw(true);                
-                mainBoard.lineCheckAndRearrange();
-                mainBoard.drawPins();
-            }
-            else if(command.getKeyType() == DownArrow){
-                util::gotoxy(12, 21);
-                printf("v");
+        while(true){
 
+            util::delay(333);
+
+            if(kbhit()){
+                command.getInput();
+                if(command.getKeyType() == command.ESC){
+                    break;
+                }
+                else if(command.getKeyType() == command.UpArrow){
+                    util::gotoxy(12, 21);
+                    printf("^");
+                    block.draw(false);
+                    block.turn(block.CLOCKWISE, mainBoard);
+                    block.draw(true);                
+                }
+                else if(command.getKeyType() == command.DownArrow){
+                    util::gotoxy(12, 21);
+                    printf("v");
+
+                    block.draw(false);
+                    block.move(Point(0,1), mainBoard);
+                    block.draw(true);                
+                }
+                else if(command.getKeyType() == command.LeftArrow){
+                    util::gotoxy(12, 21);
+                    printf("<");
+
+                    block.draw(false);
+                    block.move(Point(-1,0), mainBoard);
+                    block.draw(true);                
+                }
+                else if(command.getKeyType() == command.RightArrow){
+                    util::gotoxy(12, 21);
+                    printf(">");
+
+                    block.draw(false);
+                    block.move(Point(1,0), mainBoard);
+                    block.draw(true);                
+                }
+                else if(command.getKeyType() == command.Space){
+                    util::gotoxy(12, 21);
+                    printf("s");
+                }
+
+            } else{
                 block.draw(false);
                 block.move(Point(0,1), mainBoard);
-                block.draw(true);                
+                block.draw(true);
             }
-            else if(command.getKeyType() == LeftArrow){
-                util::gotoxy(12, 21);
-                printf("<");
+            
+            if(block.isDownEnable(mainBoard)){
+                BottomTouchCounter = 0;
+            } else {
+                BottomTouchCounter++;
+            }
 
-                block.draw(false);
-                block.move(Point(-1,0), mainBoard);
-                block.draw(true);                
-            }
-            else if(command.getKeyType() == RightArrow){
-                util::gotoxy(12, 21);
-                printf(">");
+            command.reset();
+            util::gotoxy(0,0);
+            printf("%d",BottomTouchCounter);
 
+            if(BottomTouchCounter == 3){
                 block.draw(false);
-                block.move(Point(1,0), mainBoard);
-                block.draw(true);                
-            }
-            else if(command.getKeyType() == Space){
-                util::gotoxy(12, 21);
-                printf("s");
+                mainBoard.setObjectPins(block);
+                mainBoard.lineCheckAndRearrange();
+                
+                util::SetColor(4);
+                mainBoard.drawPins();
+                break;
             }
         }
 
-        else{
-            block.draw(false);
-            block.move(Point(0,1), mainBoard);
-            block.draw(true);
-        }
-
-        command.reset();
-        util::gotoxy(0,0);
-        util::delay(333);
+        if(command.getKeyType() == command.ESC)
+            break;
     }
 
     util::gotoxy(0,22);

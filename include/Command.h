@@ -3,18 +3,20 @@
 
 namespace util{
 
-    enum {
-        ESC = 100,
-        UpArrow,
-        DownArrow,
-        LeftArrow,
-        RightArrow,
-        Space,
-        Null,
-    };
-
     class Command{
         public:
+
+            // Const Parameter
+            enum {
+                ESC = 100,
+                UpArrow,
+                DownArrow,
+                LeftArrow,
+                RightArrow,
+                Space,
+                Null,
+            };
+
             // Constructor
             Command();
             

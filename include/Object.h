@@ -4,11 +4,6 @@
 
 namespace canva{
 
-    enum DirClock{
-        CLOCKWISE,
-        COUNTERCLOCKWISE,
-    };
-
     // Pre-declaration of Class, Rect and Board
     // Completely declare in "Rect.h" 
     // Completely declare in "Board.h" 
@@ -19,6 +14,13 @@ namespace canva{
     class Object{
         
         public:
+
+            // Const Parameter
+            enum DirClock{
+                CLOCKWISE,
+                COUNTERCLOCKWISE,
+            };
+
             // Consturctor
             Object(const int type, const Point &loc=Point(0, 0));
             
@@ -39,6 +41,9 @@ namespace canva{
 
             // Is touch board pin
             bool isTouchPins(const Board &board) const;
+
+            // Is go down avaliable
+            bool isDownEnable(const Board &board);
 
             // Draw
             void draw(bool show=true) const;

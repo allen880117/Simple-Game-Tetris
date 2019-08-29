@@ -38,7 +38,7 @@ namespace canva{
     }
 
     // Draw Boundary (innner)
-    void Rect::drawBoundary(){
+    void Rect::drawInnerBoundary(){
 
         // Top Bound
         util::gotoxy(this->LeftTop);
@@ -65,6 +65,38 @@ namespace canva{
 
         // Avolid the twinkle of cursor
         util::gotoxy(0, 0);
+    }
+
+
+    // Draw Boundary (outer)
+    void Rect::drawOuterBoundary(){
+
+        // Top Bound
+        util::gotoxy( this->LeftTop + Point(-1,-1) );
+        for(int i=0; i<width+2; i++){
+            if( i == 0 || i == width+2 - 1) printf("%s", cc::cConner);
+            else printf("%s", cc::cDash);
+        }
+
+        // Between
+        for(int i=1; i<height+2-1; i++){
+            printf("\n");
+            for(int i=0; i<width+2; i++){
+                if( i == 0 || i == width+2 - 1) printf("%s", cc::cSideEdge);
+                else printf("%s", cc::cEmpty);
+            }
+        }
+
+        // Bottom Bound
+        printf("\n");
+        for(int i=0; i<width+2; i++){
+            if( i == 0 || i == width+2 - 1) printf("%s", cc::cConner);
+            else printf("%s", cc::cDash);
+        }
+
+        // Avolid the twinkle of cursor
+        util::gotoxy(0, 0);
+    
     }
 
     // Get LeftTop

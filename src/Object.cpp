@@ -157,6 +157,15 @@ namespace canva{
         return board.Board::isPinsTouched(*this);
     }
 
+    // Is go down avaliable
+    bool Object::isDownEnable(const Board &board){
+        this->locate = this->locate + Point(0, 1);
+        bool isLegal = this->isInsideRect(board.Board::getRect())
+                    && this->isTouchPins(board);
+        this->locate = this->locate - Point(0, 1);
+        return isLegal;
+    }
+    
     // Draw
     void Object::draw(const bool show) const{
         

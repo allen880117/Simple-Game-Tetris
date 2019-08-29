@@ -25,6 +25,8 @@ namespace cc{
 
     extern int scaleWidth;
 
+    extern int delayTime;
+
 } // namespace cc
 
 #endif

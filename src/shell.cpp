@@ -44,11 +44,10 @@ int main(){
         util::SetColor(7);
         block.reset(rand()%7, generatePoint);
         block.draw(true);
-        util::delay(333);
 
         while(true){
 
-            util::delay(333);
+            util::delay(cc::delayTime);
 
             if(kbhit()){
                 command.getInput();
@@ -89,6 +88,10 @@ int main(){
                 else if(command.getKeyType() == command.Space){
                     util::gotoxy(12, 21);
                     printf("s");
+
+                    block.draw(false);
+                    while(block.move(Point(0,1), mainBoard));
+                    block.draw(true);
                 }
 
             } else{

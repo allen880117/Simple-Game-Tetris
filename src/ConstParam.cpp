@@ -9,4 +9,5 @@ namespace cc{
 
     int scaleWidth = 2;
 
+    int delayTime = 200;
 } // namespace cc

@@ -91,6 +91,7 @@ int main(){
 
                     block.draw(false);
                     while(block.move(Point(0,1), mainBoard));
+                    BottomTouchCounter = 3;
                     block.draw(true);
                 }
 
@@ -110,7 +111,7 @@ int main(){
             util::gotoxy(0,0);
             printf("%d",BottomTouchCounter);
 
-            if(BottomTouchCounter == 3){
+            if(BottomTouchCounter >= 3){
                 block.draw(false);
                 mainBoard.setObjectPins(block);
                 mainBoard.lineCheckAndRearrange();

@@ -38,7 +38,7 @@ namespace canva{
         }
     }
 
-    // Is the pin be touched by object, "false" means Obj touch the Pin
+    // Is the pin be touched by object
     bool Board::isPinsTouched(const Object &obj) const{
         
         for(int i=0; i<4; i++){
@@ -46,10 +46,10 @@ namespace canva{
             int idx = offsetFromLT.Y * this->getWidth() + offsetFromLT.X;
             
             if(this->pin[idx] == 1) // Obj touch the pin
-                return false;
+                return true;
         }
 
-        return true; // Obj doesn't touch the pins
+        return false; // Obj doesn't touch the pins
     }
 
     // Set pins of Object

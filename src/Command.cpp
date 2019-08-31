@@ -16,7 +16,7 @@ namespace util {
     }
 
     // Check input key (ANSI)
-    int Command::getKeyType(){
+    int Command::getKeyType() const{
         
         if( this->prefix == 0xe0 || this->prefix == 0x00 ){
             switch (this->postfix){

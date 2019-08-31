@@ -24,7 +24,7 @@ namespace util{
             void getInput();
 
             // Check input key
-            int getKeyType();
+            int getKeyType() const;
 
             // Reset
             void reset();

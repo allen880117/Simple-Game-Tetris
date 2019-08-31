@@ -92,7 +92,7 @@ namespace canva{
         // Check is moved object inside boundary
         // Check does moved object touch the pins on board
         bool isLegal = this->isInsideRect(board.Board::getRect())
-                    && this->isTouchPins(board);
+                    && (!this->isTouchPins(board));
 
         if(!isLegal) { // Not a legal move
             // Recovery
@@ -118,7 +118,7 @@ namespace canva{
         // Check is turned object inside boundary
         // Check does turned object touch the pins on board
         bool isLegal = this->isInsideRect(board.Board::getRect())
-                    && this->isTouchPins(board);
+                    && (!this->isTouchPins(board));
 
         if(!isLegal) { // Not a legal turn 
 
@@ -161,7 +161,7 @@ namespace canva{
     bool Object::isDownEnable(const Board &board){
         this->locate = this->locate + Point(0, 1);
         bool isLegal = this->isInsideRect(board.Board::getRect())
-                    && this->isTouchPins(board);
+                    && (!this->isTouchPins(board));
         this->locate = this->locate - Point(0, 1);
         return isLegal;
     }

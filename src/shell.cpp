@@ -15,34 +15,42 @@ using namespace canva;
 
 int main(){
     
-    util::clrscr();
-
-    // Draw Main Board
-    Board mainBoard(Point(1, 1), Point(10, 20));
-    util::SetColor(10);
-    mainBoard.getRect().drawOuterBoundary();
-    mainBoard.drawPins();
-
+    /* ***** Pre Process ***** */
     // Random Number Generator
     srand(time(NULL));
     int typeRng = rand() % 7;
 
-    // Instantiate Tetris Block
-    Point generatePoint = mainBoard.getRect().getLeftTop() 
-                            + Point(mainBoard.getWidth()/2 -2 , 0);
+    // Instantiate Command, Main Board and Tetris Block
+    Board mainBoard(Point(1, 1), Point(10, 20));
+    Point generatePoint = mainBoard.getRect().getLeftTop() + Point(mainBoard.getWidth()/2 -2 , 0);
     Object block(typeRng, generatePoint); 
-
-    // Instantiate Command
     Command command;
 
-    while(true){
+    // Clean Screen and Draw outer boundary
+    util::clrscr();
+    util::SetColor(10);
+    mainBoard.getRect().drawOuterBoundary();
 
-        // typeRng = rand() % 7;
-        // block.reset(typeRng, Point(1,1));
-        int BottomTouchCounter = 0;
+    /* ***** Main Process ***** */
+    // Main Loop
+    while(true){
         
-        util::SetColor(7);
-        block.reset(rand()%7, generatePoint);
+        // Initialize collision counters
+        int BottomTouchCounter = 0;
+
+        // Re-Generate Block
+        typeRng = rand() % 7;
+        block.reset(typeRng, generatePoint);
+        
+        // 
+        if(block.isTouchPins(mainBoard)){
+            util::gotoxy(mainBoard.getRect().getRightBottom()+Point(2, 0));
+            std::printf("GAME OVER");
+            // Out of Main Loop
+            break; 
+        }
+
+        util::SetColor(7);        
         block.draw(true);
 
         while(true){
@@ -50,52 +58,35 @@ int main(){
             util::delay(cc::delayTime);
 
             if(kbhit()){
+
                 command.getInput();
+                
                 if(command.getKeyType() == command.ESC){
                     break;
-                }
-                else if(command.getKeyType() == command.UpArrow){
-                    util::gotoxy(12, 21);
-                    printf("^");
+                } else if(command.getKeyType() == command.UpArrow){
                     block.draw(false);
                     block.turn(block.CLOCKWISE, mainBoard);
                     block.draw(true);                
-                }
-                else if(command.getKeyType() == command.DownArrow){
-                    util::gotoxy(12, 21);
-                    printf("v");
-
+                } else if(command.getKeyType() == command.DownArrow){
                     block.draw(false);
                     block.move(Point(0,1), mainBoard);
                     block.draw(true);                
-                }
-                else if(command.getKeyType() == command.LeftArrow){
-                    util::gotoxy(12, 21);
-                    printf("<");
-
+                } else if(command.getKeyType() == command.LeftArrow){
                     block.draw(false);
                     block.move(Point(-1,0), mainBoard);
                     block.draw(true);                
-                }
-                else if(command.getKeyType() == command.RightArrow){
-                    util::gotoxy(12, 21);
-                    printf(">");
-
+                } else if(command.getKeyType() == command.RightArrow){
                     block.draw(false);
                     block.move(Point(1,0), mainBoard);
                     block.draw(true);                
-                }
-                else if(command.getKeyType() == command.Space){
-                    util::gotoxy(12, 21);
-                    printf("s");
-
+                } else if(command.getKeyType() == command.Space){
                     block.draw(false);
                     while(block.move(Point(0,1), mainBoard));
                     BottomTouchCounter = 3;
                     block.draw(true);
                 }
 
-            } else{
+            } else {
                 block.draw(false);
                 block.move(Point(0,1), mainBoard);
                 block.draw(true);
@@ -107,10 +98,6 @@ int main(){
                 BottomTouchCounter++;
             }
 
-            command.reset();
-            util::gotoxy(0,0);
-            printf("%d",BottomTouchCounter);
-
             if(BottomTouchCounter >= 3){
                 block.draw(false);
                 mainBoard.setObjectPins(block);
@@ -120,12 +107,15 @@ int main(){
                 mainBoard.drawPins();
                 break;
             }
+
+            command.reset();
         }
 
         if(command.getKeyType() == command.ESC)
             break;
     }
 
+    /* ***** End Process ***** */
     util::gotoxy(0,22);
     std::system("Pause");
 }

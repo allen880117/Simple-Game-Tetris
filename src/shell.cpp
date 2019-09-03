@@ -47,7 +47,7 @@ int main(){
             util::gotoxy(mainBoard.getRect().getRightBottom()+Point(2, 0));
             std::printf("GAME OVER");
             // Out of Main Loop
-            break; 
+            goto END;
         }
 
         util::SetColor(7);        
@@ -62,7 +62,7 @@ int main(){
                 command.getInput();
                 
                 if(command.getKeyType() == command.ESC){
-                    break;
+                    goto END;
                 } else if(command.getKeyType() == command.UpArrow){
                     block.draw(false);
                     block.turn(block.CLOCKWISE, mainBoard);
@@ -110,12 +110,10 @@ int main(){
 
             command.reset();
         }
-
-        if(command.getKeyType() == command.ESC)
-            break;
     }
 
     /* ***** End Process ***** */
-    util::gotoxy(0,22);
-    std::system("Pause");
+    END:
+        util::gotoxy(0,22);
+        std::system("Pause");
 }
